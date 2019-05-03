@@ -16,14 +16,29 @@ namespace Mic.Volo.PFMCoreApp
                 {
                     categories[i] = new Category
                     {
-                        
+
                         Title = "Title" + i.ToString(),
                         Description = "Desc" + i.ToString(),
 
                     };
-                    db.Categories.Add(categories[i]);
+                   // db.Categories.Add(categories[i]);
                 }
-                db.SaveChanges();
+               // db.SaveChanges();
+                Random rnd = new Random();
+                int Count = 5;
+                for (int i = 0; i < Count; i++)
+                {
+                    for (int j = 0; j < 5000; j++)
+                    {
+                        db.Wallets.Add(new Wallet
+                        {
+                            Amount = 50,
+                            Category = categories[rnd.Next(0,10)],
+                            Date = DateTime.UtcNow
+                        });
+                    }
+                    db.SaveChanges();
+                }
             }
 
             //using (var db = new PFMDbContext())
